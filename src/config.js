@@ -9,23 +9,29 @@ const CONFIG_DOCKERCOMPOSE = "docker-compose.yml";
 
 const CONTAINER_PATH = path.resolve(process.argv[0], "..", "local-nginx");
 
-function stopNginxContainer() {
-    exec(`docker compose -f "${path.resolve(CONTAINER_PATH, CONFIG_DOCKERCOMPOSE)}" down`, (error) => {
+function stopNginxContainer(onEnd) {
+    exec(`docker compose -f "${path.resolve(CONTAINER_PATH, CONFIG_DOCKERCOMPOSE)}" down`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
         }
-        console.log("Stopped existing nginx container.");
+        console.log("Stopped existing nginx container");
+        console.log("stdout:", stdout);
+        console.log("stderr:", stderr);
+        onEnd && onEnd();
     });
 }
 
-function startNginxContainer() {
-    exec(`docker compose -f "${path.resolve(CONTAINER_PATH, CONFIG_DOCKERCOMPOSE)}" up -d --build`, (error) => {
+function startNginxContainer(onEnd) {
+    exec(`docker compose -f "${path.resolve(CONTAINER_PATH, CONFIG_DOCKERCOMPOSE)}" up -d --build`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
         }
-        console.log('Started nginx container.');
+        console.log('Started nginx container');
+        console.log("stdout:", stdout);
+        console.log("stderr:", stderr);
+        onEnd && onEnd();
     });
 }
 
