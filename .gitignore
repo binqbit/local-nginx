@@ -1,0 +1,6 @@
+/node_modules
+/local-nginx
+package-lock.json
+yarn.lock
+local-nginx
+local-nginx.exe

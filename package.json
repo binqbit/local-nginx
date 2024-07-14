@@ -1,0 +1,16 @@
+{
+  "license": "ISC",
+  "name": "local-nginx",
+  "version": "1.0.0",
+  "description": "Local Nginx",
+  "bin": {
+    "local-nginx": "./src/main.js"
+  },
+  "scripts": {
+    "start": "node ./src/main.js",
+    "build": "pkg . --targets node14-win-x64 --output local-nginx"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2"
+  }
+}
